@@ -1,0 +1,47 @@
+<resources>
+    <!-- detail -->
+    <dimen name="detail_title_text_size">32sp</dimen>
+    <dimen name="detail_body_text_size">22sp</dimen>
+    <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
+
+    <dimen name="fab_elevation">2dp</dimen>
+    <dimen name="fab_press_translation_z">6dp</dimen>
+    <dimen name="fab_margin">24dp</dimen>
+
+    <!-- appbar elevation -->
+    <dimen name="appbar_elevation">4dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="spacing_xsmall">2dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+    <dimen name="fab_border_width">0dp</dimen>
+
+    <dimen name="toolbar_elevation_article_list">0dp</dimen>
+
+    <dimen name="recycler_padding_bottom_article_list">28dp</dimen>
+
+    <dimen name="reveal_container_height">300dp</dimen>
+
+    <dimen name="header_image_width_height">100dp</dimen>
+
+    <dimen name="header_image_margin">16dp</dimen>
+
+    <dimen name="article_title_margin">24dp</dimen>
+
+    <dimen name="article_title_padding">16dp</dimen>
+
+    <dimen name="article_subtitle_padding">16dp</dimen>
+
+    <dimen name="article_title_padding_bottom">4dp</dimen>
+
+    <dimen name="article_byline_margin">24dp</dimen>
+
+    <dimen name="article_body_margin_top_bottom">12dp</dimen>
+
+    <dimen name="article_body_margin_left_right">24dp</dimen>
+
+    <dimen name="cardview_margin">4dp</dimen>
+</resources>

@@ -1,0 +1,88 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/reveal_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/reveal_container_height"
+            android:background="@color/background_color_reveal_container">
+
+            <com.awesome.byunghwa.app.xyzreader.ui.SquareImageView
+                android:id="@+id/background_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/header_image"
+                android:layout_width="@dimen/header_image_width_height"
+                android:layout_height="@dimen/header_image_width_height"
+                android:layout_gravity="start|bottom"
+                android:layout_marginBottom="@dimen/header_image_margin"
+                android:layout_marginStart="@dimen/header_image_margin"
+                android:layout_marginLeft="@dimen/header_image_margin"
+                android:scaleType="fitCenter"
+                android:tint="@color/main_photo_tint"
+                tools:ignore="ContentDescription"
+                tools:src="@mipmap/ic_launcher" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/text_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/photo_placeholder"
+            android:orientation="vertical"
+            android:transitionGroup="true">
+
+            <TextView
+                android:id="@+id/article_title"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/article_title_margin"
+                android:fontFamily="sans-serif-condensed"
+                android:lineSpacingMultiplier="0.9"
+                android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+                android:textSize="@dimen/detail_title_text_size"
+                android:textStyle="bold"
+                tools:text="@string/title" />
+
+            <TextView
+                android:id="@+id/article_byline"
+                style="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/article_byline_margin"
+                android:layout_marginRight="@dimen/article_byline_margin"
+                tools:text="@string/timeline" />
+
+            <TextView
+                android:id="@+id/article_body"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/article_body_margin_top_bottom"
+                android:layout_marginEnd="@dimen/article_body_margin_left_right"
+                android:layout_marginLeft="@dimen/article_body_margin_left_right"
+                android:layout_marginRight="@dimen/article_body_margin_left_right"
+                android:layout_marginStart="@dimen/article_body_margin_left_right"
+                android:layout_marginTop="@dimen/article_body_margin_top_bottom"
+                android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                android:paddingBottom="@dimen/detail_body_bottom_margin"
+                android:textColorLink="@color/theme_accent"
+                android:textSize="@dimen/detail_body_text_size"
+                tools:text="@string/lorem_ipsum" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
