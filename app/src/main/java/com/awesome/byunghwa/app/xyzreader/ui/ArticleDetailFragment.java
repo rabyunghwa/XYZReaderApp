@@ -109,9 +109,9 @@ public class ArticleDetailFragment extends Fragment implements
         bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
         headerImage = (ImageView) revealContainer.findViewById(R.id.header_image);
 
-        headerImage.setTransitionName(ArticleListActivity.transitionNames[mItemPosition]);
+        headerImage.setTransitionName(String.valueOf(mItemPosition));
 
-        LogUtil.log_i(TAG, "header image transition name: " + ArticleListActivity.transitionNames[mItemPosition]);
+        LogUtil.log_i(TAG, "header image transition name: " + mItemPosition);
 
         backgroundImage = (ImageView) revealContainer.findViewById(R.id.background_image);
 
@@ -121,15 +121,25 @@ public class ArticleDetailFragment extends Fragment implements
 
         //LogUtil.log_i(TAG, "ImageView is null: " + (image == null));
 
-        /*mRootView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public boolean onPreDraw() {
-                mRootView.getViewTreeObserver().removeOnPreDrawListener(this);
-                getActivity().startPostponedEnterTransition();
-                return true;
-            }
-        });*/
+//        mRootView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//            @Override
+//            public boolean onPreDraw() {
+//                mRootView.getViewTreeObserver().removeOnPreDrawListener(this);
+//                getActivity().startPostponedEnterTransition();
+//                return true;
+//            }
+//        });
+
+//        headerImage.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//            @Override
+//            public boolean onPreDraw() {
+//                headerImage.getViewTreeObserver().removeOnPreDrawListener(this);
+//                getActivity().startPostponedEnterTransition();
+//                return true;
+//            }
+//        });
 
         //ViewCompat.setTransitionName(headerImage, ArticleListActivity.transitionNames[mItemPosition]);
 
@@ -254,7 +264,7 @@ public class ArticleDetailFragment extends Fragment implements
             });*/
 
             // header image setup
-            Glide.with(headerImage.getContext()).load(photoUrl).into(headerImage);
+//            Glide.with(headerImage.getContext()).load(photoUrl).into(headerImage);
 
             mRootView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -265,6 +275,8 @@ public class ArticleDetailFragment extends Fragment implements
                     return true;
                 }
             });
+
+            Glide.with(headerImage.getContext()).load(photoUrl).into(headerImage);
 
             LogUtil.log_i(TAG, "ArticleDetailFragment photourl: " + photoUrl);
             //Picasso.with(headerImage.getContext()).load(photoUrl).into(headerImage);

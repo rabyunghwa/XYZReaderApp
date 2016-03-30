@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,13 +25,14 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.awesome.byunghwa.app.xyzreader.R;
 import com.awesome.byunghwa.app.xyzreader.application.MyApplication;
 import com.awesome.byunghwa.app.xyzreader.data.ArticleLoader;
-import com.awesome.byunghwa.app.xyzreader.data.ItemsContract;
 import com.awesome.byunghwa.app.xyzreader.data.UpdaterService;
 import com.awesome.byunghwa.app.xyzreader.util.LogUtil;
+import com.awesome.byunghwa.app.xyzreader.util.NetworkUtil;
 import com.awesome.byunghwa.app.xyzreader.util.Utils;
 
 import java.util.List;
@@ -48,13 +48,13 @@ public class ArticleListActivity extends AppCompatActivity implements
     private static final String TAG = "MainActivity";
     private static final boolean DEBUG = true;
 
-    static final String EXTRA_CURRENT_ITEM_POSITION = "extra_current_item_position";
-    static final String EXTRA_OLD_ITEM_POSITION = "extra_old_item_position";
+    public static final String EXTRA_CURRENT_ITEM_POSITION = "extra_current_item_position";
+    public static final String EXTRA_OLD_ITEM_POSITION = "extra_old_item_position";
 
     private Bundle mTmpState;
     private static boolean mIsReentering;
 
-    public static final String[] transitionNames = MyApplication.instance.getResources().getStringArray(R.array.transition_name_array);
+    //public static final String[] transitionNames = MyApplication.instance.getResources().getStringArray(R.array.transition_name_array);
 
     private final SharedElementCallback mCallback = new SharedElementCallback() {
         @Override
@@ -67,7 +67,7 @@ public class ArticleListActivity extends AppCompatActivity implements
                     // If currentPosition != oldPosition the user must have swiped to a different
                     // page in the DetailsActivity. We must update the shared element so that the
                     // correct one falls into place.
-                    String newTransitionName = ArticleListActivity.transitionNames[currentPosition];
+                    String newTransitionName = String.valueOf(currentPosition);
                     View newSharedView = mRecyclerView.findViewWithTag(newTransitionName);
                     if (newSharedView != null) {
                         names.clear();
@@ -160,7 +160,11 @@ public class ArticleListActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
-            refresh();
+            if (NetworkUtil.isNetworkAvailable(this)) {
+                refresh();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -311,11 +315,12 @@ public class ArticleListActivity extends AppCompatActivity implements
                 //Glide.with(thumbnailView.getContext()).load(mCursor.getString(ArticleLoader.Query.THUMB_URL)).into(thumbnailView);
                 thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
 
-                thumbnailView.setTransitionName(ArticleListActivity.transitionNames[position]);
+                thumbnailView.setTransitionName(String.valueOf(position));
 
-                thumbnailView.setTag(ArticleListActivity.transitionNames[position]);
+                thumbnailView.setTag(String.valueOf(position));
 
-                itemView.setTag(ItemsContract.Items.buildItemUri(mCursor.getLong(ArticleLoader.Query._ID)));
+                //itemView.setTag(ItemsContract.Items.buildItemUri(mCursor.getLong(ArticleLoader.Query._ID)));
+                itemView.setTag(position);
 
                 mPosition = position;
             }
@@ -324,14 +329,16 @@ public class ArticleListActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 mIsReentering = false;
                 LogUtil.log_i("startActivity(Intent, Bundle)", false);
-                Uri uriTag = (Uri) itemView.getTag();
-                long clickedArticleId = ItemsContract.Items.getItemId(uriTag);
+                //Uri uriTag = (Uri) itemView.getTag();
+                int position = (int) itemView.getTag();
+                //long clickedArticleId = ItemsContract.Items.getItemId(uriTag);
+                long clickedArticleId = position;
                 LogUtil.log_i(TAG, "clicked article id: " + clickedArticleId);
                 Intent intent = new Intent(ArticleListActivity.this, ArticleDetailActivity.class);
-                intent.putExtra(EXTRA_CURRENT_ITEM_POSITION, mPosition);
-                LogUtil.log_i(TAG, "extra current item position: " + mPosition); // extra current item position: 0
+                intent.putExtra(EXTRA_CURRENT_ITEM_POSITION, position);
+                LogUtil.log_i(TAG, "extra current item position: " + position); // extra current item position: 0
                 intent.putExtra(ArticleDetailActivity.KEY_CLICKED_IMAGE_ID, clickedArticleId);
-                LogUtil.log_i(TAG, "extra clicked image id: " + clickedArticleId); //extra clicked image id: 2036
+                LogUtil.log_i(TAG, "extra clicked image id: " + position); //extra clicked image id: 2036
                 LogUtil.log_i(TAG, "onClick thumbnail transition name: " + thumbnailView.getTransitionName());// onClick thumbnail transition name: first
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
                         ArticleListActivity.this, thumbnailView, thumbnailView.getTransitionName()).toBundle());

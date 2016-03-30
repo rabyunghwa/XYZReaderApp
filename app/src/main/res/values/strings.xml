@@ -11,20 +11,22 @@
     <string name="title">1. Bacon spam ipsum dolor sit amet</string>
     <string name="timeline">Jun 20, 2013 by Isaac Newton</string>
 
+    <string name="no_internet">No Internet connection. Please go to settings and enable network connection.</string>
+
     <!-- For Shared Element Transition -->
     <string name="detail_picture_transition_name" translatable="false">com.awesome.byunghwa.app.xyzreader.extraImage</string>
 
-    <string-array name="transition_name_array">
-        <item>first</item>
-        <item>second</item>
-        <item>third</item>
-        <item>fourth</item>
-        <item>fifth</item>
-        <item>sixth</item>
-        <item>seventh</item>
-        <item>eighth</item>
-        <item>ninth</item>
-        <item>tenth</item>
-        <item>eleventh</item>
-    </string-array>
+    <!--<string-array name="transition_name_array">-->
+        <!--<item>first</item>-->
+        <!--<item>second</item>-->
+        <!--<item>third</item>-->
+        <!--<item>fourth</item>-->
+        <!--<item>fifth</item>-->
+        <!--<item>sixth</item>-->
+        <!--<item>seventh</item>-->
+        <!--<item>eighth</item>-->
+        <!--<item>ninth</item>-->
+        <!--<item>tenth</item>-->
+        <!--<item>eleventh</item>-->
+    <!--</string-array>-->
 </resources>
